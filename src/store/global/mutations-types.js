@@ -1,0 +1,1 @@
+export const CHANGE_TEST_TEXT = 'CHANGE_TEST_TEXT'

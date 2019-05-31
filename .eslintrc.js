@@ -5,16 +5,16 @@ module.exports = {
     'commonjs': true,
     'es6': true,
   },
-  'parser': 'babel-eslint',
   'extends': 'eslint:recommended',
   'parserOptions': {
+    "parser": "babel-eslint",
     'ecmaFeatures': {
-      'jsx': true
+      'jsx': false
     },
     'ecmaVersion': 2018,
   },
   'plugins': [
-    'react'
+    'vue'
   ],
   'rules': {
     'class-methods-use-this': ['off', {

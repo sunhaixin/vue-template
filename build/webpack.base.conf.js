@@ -1,11 +1,13 @@
-const path = require(path)
+const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const VueLoaderPlugin = require('vue-loader')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const optimizeCss = require('optimize-css-assets-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-export default {
+module.exports = {
   entry: {
-    index: path.resolve(__dirname, './src/index.js'),
+    index: './src/index.js',
   },
   output: {
     path: path.resolve(__dirname, './dist'),
@@ -52,7 +54,17 @@ export default {
       root: path.resolve(__dirname, '../')
     }),
     new HtmlWebpackPlugin({
-      template: './src/index.html'
+      template: './src/index.html',
+      // favicon: path.resolve('./src/favicon.ico')
+    }),
+    new optimizeCss({
+      cssProcessor: require('cssnano'),
+      cssProcessorOptions: { discardComments: { removeAll: true } },
+      canPrint: true
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].[contenthash].css',
     }),
     new VueLoaderPlugin()
   ],
@@ -72,10 +84,11 @@ export default {
     extensions: ['.vue', '.js'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
+      '@src': path.resolve(__dirname, '../src'),
       '@static': path.resolve(__dirname, '../src/static'),
       '@request': path.resolve(__dirname, '../src/request'),
+      '@view': path.resolve(__dirname, '../src/view'),
       '@components': path.resolve(__dirname, '../src/view/components'),
-      '@src': path.resolve(__dirname, '../src'),
     }
   }
 }

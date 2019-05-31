@@ -1,38 +1,39 @@
 <template>
-  <div class='page1'>
-    <div>This Home</div>
-    <div>{{title}}</div>
+  <div class='home'>
+    <div>首页</div>
+    <div>测试 vuex： {{testText}}</div>
     <button class='btn' v-on:click='changeTitle(new Date().toLocaleString())'>click</button>
   </div>
 </template>
 
 <script>
-  import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
-  export default {
-    name: 'home',
-    data () {
-      return {
-        age: 20
-      }
-    },
+export default {
+  name: 'Home',
 
-    mounted () {
-
-    },
-
-    computed: {
-      ...mapState({
-        title: state => state.home.title
-      })
-    },
-
-    methods: {
-      ...mapActions({
-        changeTitle: 'home/changeTitle'
-      })
+  data () {
+    return {
+      
     }
+  },
+
+  mounted () {
+
+  },
+
+  computed: {
+    ...mapState({
+      testText: state => state.global.testText
+    })
+  },
+
+  methods: {
+    ...mapActions({
+      changeTitle: 'global/changeTestText'
+    })
   }
+}
 </script>
 
 <style lang='scss' scoped>

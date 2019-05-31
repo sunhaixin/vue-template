@@ -3,10 +3,9 @@
 </template>
 
 <script>
-import Home from './Home'
 
 export default {
-  name: 'app',
+  name: 'App',
 
   data() {
     return {
